@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<script type="text/javascript" src="js/xinxin.js" ></script>
+		
+	
+	<style type="text/css">
+		*{
+			padding:0;margin: 0;
+		}
+		body{
+		/*	background: url(img/bei1.png) no-repeat;
+			background-size: cover;*/
+			background-color: black;
+		}
+		.box-page{
+			width: 720px;height: 460px;
+			margin-top: 480px;
+			position: absolute;
+			transform-style: preserve-3d;
+		}
+		#box{
+			margin:auto;
+			width: 720px;height: 460px;
+			/*border: 1px solid black;*/
+			text-align: center;
+		}
+		.a1{
+			/*background-color:w ;*/
+			background: url(img/a3.png);
+		}
+		.b1{
+			background: url(img/a1.png);
+		}
+		.b2{
+			background: url(img/a2.png);
+		}
+		.a2{
+			/*background-color: black;*/
+			background: url(img/b3.png);
+		}
+		.a3{
+			/*background-color: blue;*/
+			background: url(img/b2.png);
+			-webkit-transform-style:preserve-3d;
+			-webkit-perspective:1500;
+			-webkit-transform-origin:0 0;
+			animation:breath 2s ease infinite alternate;
+		}
+		.kai{
+			width: 400px;
+			height: 250px;
+			/*border: 3px solid red;*/
+			border: none;
+			position:absolute ;
+			top: 24%;
+			right: 30%;
+			font-size: 80px;
+			background: rgba(255,255,255,0);
+			color: silver;
+		}
+		
+		@keyframes breath{
+	    	100%{transform:rotateX(30deg);}
+		}
+		|
+	</style>
+	
+	<body>
+		<div id="box">
+			<div class="box-page a1"></div>
+			
+			<div class="box-page b1"></div>
+			<div class="box-page b2"></div>
+			
+			<div class="box-page a2"></div>
+			<div class="box-page a3"></div>
+			
+			<button class="kai" onmousedown="load_sound(url)" onclick="location.href='c/w.html'" >拆</button>
+			<!--<a href="c/w.html" onmousedown="load_sound(url)" >cai</a>-->
+			
+			
+		</div>
+		<audio autoplay="autoplay" loop="loop" >
+			  	<source src="img/标准录音 3.mp3" type="audio/mp3" ></source>
+			</audio>
+		
+		
+	</body>
+</html>

@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<!--<script type="text/javascript" src="js/xinxin.js" ></script>-->
+	<style type="text/css">
+		*{
+			padding:0;margin: 0;
+		}
+		body{
+			background-color: black;
+		}
+		.box-page{
+			width: 720px;height: 460px;
+			margin-top: 480px;
+			position: absolute;
+			transform-style: preserve-3d;
+		}
+		#box{
+			margin:0 auto;
+			
+			position:fixed;
+			right: 13%;
+			top: 10%;
+			
+			width: 720px;height: 460px;
+			/*border: 1px solid black;*/
+			text-align: center;
+			
+			animation-name:hezi;
+            animation-duration: 18s;
+            animation-fill-mode:forwards;
+			
+		}
+		.a1{
+			/*background-color:w ;*/
+			background-color:lightsteelblue;
+		}
+		
+		.b1{
+			background: url(../img/a1.png);
+		}
+		.neirong{
+			background: url(../img/xx.png)no-repeat;
+			background-size: cover;
+			position:fixed;
+			animation-name:xin;
+            animation-duration: 18s;
+            animation-fill-mode:forwards;
+		}
+		.b2{
+			background: url(../img/a2.png);
+			-webkit-transform-style:preserve-3d;
+			-webkit-perspective:1500;
+			-webkit-transform-origin:0 0;
+			animation-name:play;
+            animation-duration: 15s;
+            animation-fill-mode:forwards;
+		}
+		
+		.a2{
+			/*background-color: black;*/
+			background: url(../img/b3.png);
+			
+		}
+		.a2{
+			animation-name:lost;
+            animation-duration: 10s;
+            animation-fill-mode:forwards;
+			
+		}
+		/*.a2:fadenum 3s infinite;{
+			animation:fadenum 3s ;
+			-webkit-animation-fill-mode:forwards;
+		}*/
+		.a3{
+			/*background-color: blue;*/
+			background: url(../img/b2.png);
+			-webkit-transform-style:preserve-3d;
+			-webkit-perspective:1500;
+			-webkit-transform-origin:0 0;
+			/*animation:breath 1s ;
+			-webkit-animation-fill-mode:forwards;*/
+			
+			animation-name:breath,lost;
+            animation-duration: 10s;
+            animation-fill-mode:forwards;
+           
+			
+		}
+		
+		.kai{
+			width: 400px;
+			height: 250px;
+			/*border: 1px solid red;*/
+			border: none;
+			position:absolute ;
+			top: 24%;
+			right: 30%;
+			font-size: 80px;
+			background: rgba(255,255,255,0);
+			color: silver;
+		}
+		
+		@keyframes breath{
+	    	0%{
+				transform:rotateX(0deg);
+				
+			}
+				
+			100%{
+				transform:rotateX(180deg);
+				}
+				
+		}
+		@keyframes lost{
+			0%{opacity: 1;}
+			50%{opacity: 1;}
+			100%{opacity: 0;}
+			
+		}
+		@keyframes play{
+			0%{
+				transform:rotateX(0deg);
+				
+			}
+			70%{
+				transform:rotateX(0deg);
+				opacity: 1;
+			}
+				
+			100%{
+				transform:rotateX(180deg);
+				opacity: 0;
+				}
+		}
+		@keyframes xin{
+			0%{height: 460px;top: 10%;}
+			80%{height:460px ;top: 10%;}
+			100%{
+				height: 995px;top: -305px;
+				
+			}
+		}
+		@keyframes hezi{
+			0%{top: 10%;}
+			80%{top: 10%;}
+			100%{top: 685px;}
+		}
+	</style>
+	
+	<body>
+		<!--<canvas style="z-index:-1;"></canvas>-->
+		<div id="box">
+			<div class="box-page a1"></div> 
+			<div class="box-page neirong"></div>
+			<div class="box-page b1"></div>
+			<div class="box-page b2"></div>
+			
+			<div class="box-page a2"></div>
+			<div class="box-page a3"></div>
+			
+			
+			<audio autoplay="autoplay" >
+			  	<!--<source src="../img/枪击案1_Freesound.wav" type="audio/mp3" ></source>-->
+			</audio>
+			<!--<button class="kai" value="" ><a href="css/w.html" style="text-decoration: initial;">拆</a></button>-->
+			<audio autoplay="autoplay" loop="loop" >
+			  	<source src="../img/标准录音1.mp3" type="audio/mp3" ></source>
+			</audio>
+			
+		</div>
+		
+		
+		 <script>
+            var canvas = document.querySelector("canvas"),
+                ctx = canvas.getContext("2d");
+
+            var ww, wh;
+
+            function onResize() {
+                ww = canvas.width = window.innerWidth;
+                wh = canvas.height = window.innerHeight;
+            }
+
+            ctx.strokeStyle = "red";
+            ctx.shadowBlur = 25;
+            ctx.shadowColor = "hsla(0, 100%, 60%,0.5)";
+
+            var precision = 100;
+            var hearts = [];
+            var mouseMoved = false;
+
+            function onMove(e) {
+                mouseMoved = true;
+                if(e.type === "touchmove") {
+                    hearts.push(new Heart(e.touches[0].clientX, e.touches[0].clientY));
+                    hearts.push(new Heart(e.touches[0].clientX, e.touches[0].clientY));
+                } else {
+                    hearts.push(new Heart(e.clientX, e.clientY));
+                    hearts.push(new Heart(e.clientX, e.clientY));
+                }
+            }
+
+            var Heart = function(x, y) {
+                this.x = x || Math.random() * ww;
+                this.y = y || Math.random() * wh;
+                this.size = Math.random() * 2 + 1;
+                this.shadowBlur = Math.random() * 10;
+                this.speedX = (Math.random() + 0.2 - 0.6) * 8;
+                this.speedY = (Math.random() + 0.2 - 0.6) * 8;
+                this.speedSize = Math.random() * 0.05 + 0.01;
+                this.opacity = 1;
+                this.vertices = [];
+                for(var i = 0; i < precision; i++) {
+                    var step = (i / precision - 0.5) * (Math.PI * 2);
+                    var vector = {
+                        x: (15 * Math.pow(Math.sin(step), 3)),
+                        y: -(13 * Math.cos(step) - 5 * Math.cos(2 * step) - 2 * Math.cos(3 * step) - Math.cos(4 * step))
+                    }
+                    this.vertices.push(vector);
+                }
+            }
+
+            Heart.prototype.draw = function() {
+                this.size -= this.speedSize;
+                this.x += this.speedX;
+                this.y += this.speedY;
+                ctx.save();
+                ctx.translate(-1000, this.y);
+                ctx.scale(this.size, this.size);
+                ctx.beginPath();
+                for(var i = 0; i < precision; i++) {
+                    var vector = this.vertices[i];
+                    ctx.lineTo(vector.x, vector.y);
+                }
+                ctx.globalAlpha = this.size;
+                ctx.shadowBlur = Math.round((3 - this.size) * 10);
+                ctx.shadowColor = "hsla(0, 100%, 60%,0.5)";
+                ctx.shadowOffsetX = this.x + 1000;
+                ctx.globalCompositeOperation = "screen"
+                ctx.closePath();
+                ctx.fill()
+                ctx.restore();
+            };
+
+            function render(a) {
+                requestAnimationFrame(render);
+
+                hearts.push(new Heart())
+                ctx.clearRect(0, 0, ww, wh);
+                for(var i = 0; i < hearts.length; i++) {
+                    hearts[i].draw();
+                    if(hearts[i].size <= 0) {
+                        hearts.splice(i, 1);
+                        i--;
+                    }
+                }
+            }
+			onResize();
+            window.addEventListener("mousemove", onMove);
+            window.addEventListener("touchmove", onMove);
+            window.addEventListener("resize", onResize);
+            requestAnimationFrame(render);
+		
+
+           
+        </script>
+		
+	</body>
+</html>
